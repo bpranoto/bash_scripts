@@ -12,37 +12,39 @@ scan()
 	local f
 	local l
 
+	# Scan current directory
 	for f in *; do
-		# Jika regular file atau directory
+		# if a regular file or directory
 		if [[ -f $f ]] || [[ -d $f ]] ; then
 
-			# Jika directory
+			# if a  directory
 			if [[ -d $f ]]; then
 
-				# masuk ke directory tsb
-				#echo "cd $f"
+				# enter that directory
 				cd $f
 
-				# proses
+				# recursively process this directory
 				scan
 
-				# kembali
+				# back to current directory
 				cd ..
 			fi
 
-			# Jika filenamenya mengandung huruf besar
+			# if the filename contains capital letter
 			if [[ "$f" =~ .*[A-Z].* ]] ; then
 
-				# Convert nama file ke huruf kecil di variable l
+				# Convert the file name to lower case
+				# store in variable l
 				l=`echo $f|tr [:upper:] [:lower:]`
 
 
-				# kalau file/directory l belum ada, maka rename
+				# check the existance of the lower case version
+			        # of the file or directory doesn't exists 
 				if ( [[ -f $f ]] &&  [[ ! -f $l ]] ) || ( [[ -d $f ]] && [[ ! -d $l ]] ) ;then
+					# doesn't exist so rename
 					mv $f  $l
 				else
-					# file/directory l sudah ada
-					# complain
+					# already exists, complain!
 					echo "Cannot rename $f to $l, $l already exists"
 				fi
 			fi
