@@ -1,2 +1,2 @@
 # bash_scripts
-Bashscripts collection
+Bashscripts collection written by Bambang Pranoto (bpranoto@gmail.com)
