@@ -21,7 +21,7 @@ scan()
 			if [[ -d $f ]]; then
 
 				# enter that directory
-				cd $f
+				cd "$f"
 
 				# recursively process this directory
 				scan
@@ -42,7 +42,7 @@ scan()
 			        # of the file or directory doesn't exists 
 				if ( [[ -f $f ]] &&  [[ ! -f $l ]] ) || ( [[ -d $f ]] && [[ ! -d $l ]] ) ;then
 					# doesn't exist so rename
-					mv $f  $l
+					mv "$f"  "$l"
 				else
 					# already exists, complain!
 					echo "Cannot rename $f to $l, $l already exists"
