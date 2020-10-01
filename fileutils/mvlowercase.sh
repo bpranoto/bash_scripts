@@ -35,17 +35,20 @@ scan()
 
 				# Convert the file name to lower case
 				# store in variable l
-				l=`echo $f|tr [:upper:] [:lower:]`
+				l=`echo "$f"|tr [:upper:] [:lower:]`
+				if [[ "$l" = "" ]] ; then
+					echo "Error converting `pwd`/$f"	
+				fi
 
 
 				# check the existance of the lower case version
 			        # of the file or directory doesn't exists 
-				if ( [[ -f $f ]] &&  [[ ! -f $l ]] ) || ( [[ -d $f ]] && [[ ! -d $l ]] ) ;then
+				if ( [[ -f "$f" ]] &&  [[ ! -f "$l" ]] ) || ( [[ -d "$f" ]] && [[ ! -d "$l" ]] ) ;then
 					# doesn't exist so rename
 					mv "$f"  "$l"
 				else
 					# already exists, complain!
-					echo "Cannot rename $f to $l, $l already exists"
+					echo "Cannot rename `pwd`/$f to $l, $l already exists"
 				fi
 			fi
 		fi	
